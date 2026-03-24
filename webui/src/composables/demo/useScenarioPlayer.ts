@@ -1,6 +1,25 @@
 import { ref, computed } from 'vue'
-import type { ScenarioData, ScenarioEvent } from './types'
+import type { ScenarioData, ScenarioEvent, AgentDef } from './types'
 import { useSimulationStore } from './useSimulationStore'
+
+// 原始 JSON——用于获取未改名的 Agent 名字
+import contentCompany from './scenarios/content-company.json'
+import ecommerce from './scenarios/ecommerce.json'
+import devTeam from './scenarios/dev-team.json'
+import researchLab from './scenarios/research-lab.json'
+import chaos from './scenarios/chaos.json'
+
+const origMap: Record<string, AgentDef[]> = {
+  'content-company': (contentCompany as any).agents,
+  'ecommerce': (ecommerce as any).agents,
+  'dev-team': (devTeam as any).agents,
+  'research-lab': (researchLab as any).agents,
+  'chaos': (chaos as any).agents,
+}
+
+function getOriginalAgents(scenarioId: string): AgentDef[] | undefined {
+  return origMap[scenarioId]
+}
 
 // =============================================
 // ScenarioPlayer — JSON 剧本回放引擎
@@ -12,11 +31,12 @@ export function useScenarioPlayer() {
 
   const scenario = ref<ScenarioData | null>(null)
   const playing = ref(false)
-  const speed = ref(1)         // 1x / 2x / 3x
+  const speed = ref(0.5)       // 0.5x / 1x / 2x / 3x
   const elapsed = ref(0)       // 已播放秒数
 
   let eventIndex = 0
   let timer: ReturnType<typeof setInterval> | null = null
+  let nameMap = new Map<string, string>()
 
   const progress = computed(() => {
     if (!scenario.value) return 0
@@ -37,8 +57,39 @@ export function useScenarioPlayer() {
     store.state.duration = data.duration
     store.initAgents(data.agents)
 
+    // 构建「原始名 → 用户改名」映射
+    nameMap = new Map()
+    const originalAgents = getOriginalAgents(data.id)
+    if (originalAgents) {
+      for (const orig of originalAgents) {
+        const renamed = data.agents.find(a => a.id === orig.id)
+        if (renamed && renamed.name !== orig.name) {
+          nameMap.set(orig.name, renamed.name)
+        }
+      }
+    }
+
     eventIndex = 0
     elapsed.value = 0
+  }
+
+  /** 替换事件文本中的原始名字 */
+  function substituteNames(text: string): string {
+    let result = text
+    for (const [orig, renamed] of nameMap) {
+      result = result.split(orig).join(renamed)
+    }
+    return result
+  }
+
+  /** 对事件中所有文本字段做名字替换 */
+  function patchEvent(evt: ScenarioEvent): ScenarioEvent {
+    if (nameMap.size === 0) return evt
+    const patched = { ...evt }
+    if (patched.message) patched.message = substituteNames(patched.message)
+    if (patched.content) patched.content = substituteNames(patched.content)
+    if (patched.comment) patched.comment = substituteNames(patched.comment)
+    return patched
   }
 
   /** 开始播放 */
@@ -59,7 +110,7 @@ export function useScenarioPlayer() {
       while (eventIndex < events.length) {
         const evt = events[eventIndex]
         if (!evt || evt.t > elapsed.value) break
-        store.pushEvent(evt)
+        store.pushEvent(patchEvent(evt))
         eventIndex++
       }
 

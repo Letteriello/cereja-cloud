@@ -29,7 +29,7 @@ watch(
       const item: FloatItem = {
         id: `f-${++floatId}`,
         text: isPositive ? `+${e.delta} ⭐` : `${e.delta} 💔`,
-        color: isPositive ? '#059669' : '#DC2626',
+        color: isPositive ? '#4A7A5E' : '#A05252',
         x: 30 + Math.random() * 40, // 随机水平位置 (30%-70%)
       }
       floats.value.push(item)
@@ -97,10 +97,10 @@ watch(
 .float-item {
   position: absolute;
   top: 40%;
-  font-size: 1.5rem;
-  font-weight: 800;
-  font-family: 'Nunito', sans-serif;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Lora', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   animation: floatUp 1.8s ease-out forwards;
 }
 

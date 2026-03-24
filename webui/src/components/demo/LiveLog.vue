@@ -138,12 +138,13 @@ function getDisplayText(entry: TimelineEntry): string {
 
 <style scoped>
 .live-log {
-  background: white;
-  border-radius: 16px;
+  background: #FFFFFF;
+  border: 1px solid #E8E6E0;
+  border-radius: 10px;
   padding: 1rem;
   max-height: 280px;
   overflow-y: auto;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .log-header {
@@ -152,21 +153,23 @@ function getDisplayText(entry: TimelineEntry): string {
   align-items: center;
   margin-bottom: 0.75rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #E8E6E0;
 }
 
 .log-title {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #334155;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1A1917;
 }
 
 .log-count {
-  font-size: 0.7rem;
-  color: #94a3b8;
-  background: #f8fafc;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: #8C8A84;
+  background: #F5F4F0;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
 }
 
 .log-list {
@@ -180,35 +183,35 @@ function getDisplayText(entry: TimelineEntry): string {
   display: flex;
   align-items: flex-start;
   gap: 0.4rem;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   line-height: 1.5;
   padding: 0.35rem 0.5rem;
-  border-radius: 8px;
-  background: #fafbfc;
+  border-radius: 6px;
+  background: #FAFAF8;
 }
 
 .log-entry--rejected {
-  background: #FFF5F5;
-  color: #DC2626;
+  background: #FBF5F5;
+  color: #A05252;
 }
 
 .log-entry--approved {
-  background: #F0FFF4;
-  color: #059669;
+  background: #F5FAF7;
+  color: #4A7A5E;
 }
 
 .log-entry--reflection {
-  background: #FFF7ED;
-  color: #9A3412;
+  background: #FBF3DC;
+  color: #7A6020;
   font-style: italic;
 }
 
 .log-entry--negative {
-  color: #DC2626;
+  color: #A05252;
 }
 
 .log-entry--positive {
-  color: #059669;
+  color: #4A7A5E;
 }
 
 .log-icon {
@@ -217,8 +220,8 @@ function getDisplayText(entry: TimelineEntry): string {
 }
 
 .log-agent {
-  font-weight: 700;
-  color: #475569;
+  font-weight: 600;
+  color: #1A1917;
   flex-shrink: 0;
 }
 
@@ -228,12 +231,12 @@ function getDisplayText(entry: TimelineEntry): string {
 
 .typing-cursor {
   animation: blink 0.8s step-end infinite;
-  color: #818CF8;
+  color: #8B6F4E;
 }
 
 .log-empty {
   text-align: center;
-  color: #94a3b8;
+  color: #8C8A84;
   padding: 2rem 0;
   font-size: 0.85rem;
 }
@@ -252,5 +255,19 @@ function getDisplayText(entry: TimelineEntry): string {
 
 @keyframes blink {
   50% { opacity: 0; }
+}
+
+@media (max-width: 640px) {
+  .live-log {
+    max-height: 220px;
+    padding: 0.75rem;
+  }
+  .log-entry {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.4rem;
+  }
+  .log-agent {
+    font-size: 0.72rem;
+  }
 }
 </style>

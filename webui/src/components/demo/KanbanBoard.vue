@@ -218,18 +218,20 @@ onUnmounted(() => window.removeEventListener('resize', handleResize))
 }
 
 .col-label {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #475569;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4A4845;
 }
 
 .col-count {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #94a3b8;
-  background: #f1f5f9;
-  padding: 0.1rem 0.5rem;
-  border-radius: 999px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #8C8A84;
+  background: #F5F4F0;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
 }
 
 .kanban-col-body {
@@ -240,34 +242,36 @@ onUnmounted(() => window.removeEventListener('resize', handleResize))
 }
 
 .task-card {
-  background: white;
-  border-radius: 12px;
+  background: #FFFFFF;
+  border-radius: 8px;
   padding: 0.75rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #E8E6E0;
   border-left: 3px solid var(--agent-color);
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .task-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .task-card--rework {
   animation: shake 0.5s ease-in-out;
-  border-left-color: #F87171;
-  background: #FFF5F5;
+  border-left-color: #A05252;
+  background: #FBF5F5;
 }
 
 .task-card--done {
   opacity: 0.8;
-  background: #F0FFF4;
+  background: #F5FAF7;
 }
 
 .task-name {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #1e293b;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1A1917;
   margin-bottom: 0.35rem;
 }
 
@@ -278,30 +282,33 @@ onUnmounted(() => window.removeEventListener('resize', handleResize))
 }
 
 .task-assignee {
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #4A4845;
 }
 
 .task-score {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #FBBF24;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #8B6F4E;
 }
 
 .task-comment {
-  font-size: 0.7rem;
-  color: #64748b;
+  font-size: 0.68rem;
+  color: #8C8A84;
   margin-top: 0.35rem;
   padding-top: 0.35rem;
-  border-top: 1px dashed #e2e8f0;
+  border-top: 1px dashed #E8E6E0;
   line-height: 1.4;
 }
 
 .rework-badge {
   display: inline-block;
-  font-size: 0.7rem;
-  color: #F87171;
-  font-weight: 700;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: #A05252;
+  font-weight: 500;
   margin-top: 0.35rem;
 }
 

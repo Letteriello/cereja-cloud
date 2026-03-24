@@ -1,0 +1,353 @@
+{
+  "id": "research-lab",
+  "name": "AI 市场营销",
+  "description": "模拟市场调研团队：多源检索 → 数据分析 → 报告撰写 → 评审校验，看 AI 如何产出一份专业的市场调研报告。",
+  "icon": "Megaphone",
+  "duration": 52,
+  "agents": [
+    { "id": "planner", "name": "研究主任", "role": "planner", "avatar": "🎓" },
+    { "id": "searcherA", "name": "检索员A", "role": "executor", "avatar": "🔎" },
+    { "id": "searcherB", "name": "检索员B", "role": "executor", "avatar": "📚" },
+    { "id": "writer", "name": "报告撰写", "role": "executor", "avatar": "📝" },
+    { "id": "reviewer", "name": "同行评审", "role": "reviewer", "avatar": "🧪" },
+    { "id": "patrol", "name": "质量监控", "role": "patrol", "avatar": "📡" }
+  ],
+  "events": [
+    {
+      "t": 0,
+      "type": "agent_status",
+      "agent": "planner",
+      "status": "thinking",
+      "message": "收到研究课题，开始规划调研方案..."
+    },
+    {
+      "t": 2,
+      "type": "log",
+      "agent": "planner",
+      "content": "课题：2026年大语言模型技术趋势研究报告。需要多源检索 + 交叉验证 + 报告撰写"
+    },
+    {
+      "t": 3,
+      "type": "task_created",
+      "agent": "planner",
+      "task": { "id": "t1", "name": "学术论文检索与摘要", "assignee": "searcherA" },
+      "message": "子任务 1 → 检索员A 负责学术论文"
+    },
+    {
+      "t": 4,
+      "type": "task_created",
+      "agent": "planner",
+      "task": { "id": "t2", "name": "行业报告与新闻整理", "assignee": "searcherB" },
+      "message": "子任务 2 → 检索员B 负责行业资讯"
+    },
+    {
+      "t": 5,
+      "type": "task_created",
+      "agent": "planner",
+      "task": { "id": "t3", "name": "综合研究报告撰写", "assignee": "writer" },
+      "message": "子任务 3 → 报告撰写负责最终报告"
+    },
+    {
+      "t": 5,
+      "type": "agent_status",
+      "agent": "planner",
+      "status": "done",
+      "message": "3 个子任务已分配，团队开始调研"
+    },
+    {
+      "t": 6,
+      "type": "agent_status",
+      "agent": "searcherA",
+      "status": "working",
+      "message": "开始检索 arXiv、Google Scholar..."
+    },
+    {
+      "t": 6,
+      "type": "task_status",
+      "task": "t1",
+      "status": "working"
+    },
+    {
+      "t": 7,
+      "type": "agent_status",
+      "agent": "searcherB",
+      "status": "working",
+      "message": "开始检索行业报告和新闻..."
+    },
+    {
+      "t": 7,
+      "type": "task_status",
+      "task": "t2",
+      "status": "working"
+    },
+    {
+      "t": 9,
+      "type": "log",
+      "agent": "searcherA",
+      "content": "检索到 45 篇相关论文，按引用量和时间排序筛选..."
+    },
+    {
+      "t": 11,
+      "type": "log",
+      "agent": "searcherB",
+      "content": "找到 McKinsey、Gartner 等 8 份行业报告 + 20 条科技新闻"
+    },
+    {
+      "t": 14,
+      "type": "log",
+      "agent": "searcherA",
+      "content": "筛选出 12 篇核心论文，提取关键发现：MoE 架构、长上下文、多模态融合为三大趋势"
+    },
+    {
+      "t": 15,
+      "type": "agent_status",
+      "agent": "searcherA",
+      "status": "done",
+      "message": "学术论文检索完成，12 篇核心论文"
+    },
+    {
+      "t": 15,
+      "type": "task_status",
+      "task": "t1",
+      "status": "review"
+    },
+    {
+      "t": 16,
+      "type": "log",
+      "agent": "searcherB",
+      "content": "整理完成：5 份行业报告摘要 + 市场数据（预计 2026 年市场规模 $500B）"
+    },
+    {
+      "t": 17,
+      "type": "agent_status",
+      "agent": "searcherB",
+      "status": "done",
+      "message": "行业资讯整理完成，提交审查"
+    },
+    {
+      "t": 17,
+      "type": "task_status",
+      "task": "t2",
+      "status": "review"
+    },
+    {
+      "t": 18,
+      "type": "agent_status",
+      "agent": "reviewer",
+      "status": "reviewing",
+      "message": "审查两份检索结果的质量和完整性..."
+    },
+    {
+      "t": 20,
+      "type": "review",
+      "agent": "reviewer",
+      "task": "t1",
+      "result": "approved",
+      "score": 4.5,
+      "comment": "论文筛选严谨，摘要提炼到位"
+    },
+    {
+      "t": 20,
+      "type": "score_change",
+      "agent": "searcherA",
+      "delta": 5,
+      "reason": "审查通过 +5"
+    },
+    {
+      "t": 22,
+      "type": "review",
+      "agent": "reviewer",
+      "task": "t2",
+      "result": "approved",
+      "score": 4.0,
+      "comment": "资讯全面，数据来源可靠"
+    },
+    {
+      "t": 22,
+      "type": "score_change",
+      "agent": "searcherB",
+      "delta": 5,
+      "reason": "审查通过 +5"
+    },
+    {
+      "t": 23,
+      "type": "agent_status",
+      "agent": "reviewer",
+      "status": "idle",
+      "message": "检索结果质量合格 ✓"
+    },
+    {
+      "t": 24,
+      "type": "agent_status",
+      "agent": "writer",
+      "status": "working",
+      "message": "开始整合资料撰写研究报告..."
+    },
+    {
+      "t": 24,
+      "type": "task_status",
+      "task": "t3",
+      "status": "working"
+    },
+    {
+      "t": 27,
+      "type": "log",
+      "agent": "writer",
+      "content": "搭建报告框架：执行摘要 → 技术趋势 → 市场分析 → 风险挑战 → 结论建议"
+    },
+    {
+      "t": 31,
+      "type": "log",
+      "agent": "writer",
+      "content": "初稿完成，约 3000 字，交叉引用了论文和行业数据"
+    },
+    {
+      "t": 33,
+      "type": "agent_status",
+      "agent": "writer",
+      "status": "done",
+      "message": "研究报告初稿完成，提交同行评审"
+    },
+    {
+      "t": 33,
+      "type": "task_status",
+      "task": "t3",
+      "status": "review"
+    },
+    {
+      "t": 34,
+      "type": "agent_status",
+      "agent": "reviewer",
+      "status": "reviewing",
+      "message": "同行评审研究报告..."
+    },
+    {
+      "t": 37,
+      "type": "log",
+      "agent": "reviewer",
+      "content": "报告逻辑严谨，但市场预测部分缺少不确定性分析，结论过于乐观"
+    },
+    {
+      "t": 38,
+      "type": "review",
+      "agent": "reviewer",
+      "task": "t3",
+      "result": "rejected",
+      "score": 3.5,
+      "comment": "缺少风险分析和不确定性讨论，结论需要更客观"
+    },
+    {
+      "t": 38,
+      "type": "score_change",
+      "agent": "writer",
+      "delta": -2,
+      "reason": "审查驳回 -2"
+    },
+    {
+      "t": 39,
+      "type": "agent_status",
+      "agent": "writer",
+      "status": "reworking",
+      "message": "报告被驳回...补充风险分析部分"
+    },
+    {
+      "t": 39,
+      "type": "agent_status",
+      "agent": "reviewer",
+      "status": "idle",
+      "message": "等待报告修改"
+    },
+    {
+      "t": 40,
+      "type": "reflection",
+      "agent": "writer",
+      "content": "研究报告要平衡呈现，不能只写利好，风险和局限性同样重要"
+    },
+    {
+      "t": 42,
+      "type": "log",
+      "agent": "writer",
+      "content": "返工完成：新增风险分析章节 + 市场预测添加置信区间 + 结论更加审慎"
+    },
+    {
+      "t": 43,
+      "type": "agent_status",
+      "agent": "writer",
+      "status": "done",
+      "message": "修改完成，重新提交评审"
+    },
+    {
+      "t": 43,
+      "type": "task_status",
+      "task": "t3",
+      "status": "review"
+    },
+    {
+      "t": 44,
+      "type": "agent_status",
+      "agent": "reviewer",
+      "status": "reviewing",
+      "message": "重新评审修改后的报告..."
+    },
+    {
+      "t": 46,
+      "type": "review",
+      "agent": "reviewer",
+      "task": "t3",
+      "result": "approved",
+      "score": 4.5,
+      "comment": "分析全面客观，风险讨论充分，可发布"
+    },
+    {
+      "t": 46,
+      "type": "score_change",
+      "agent": "writer",
+      "delta": 5,
+      "reason": "审查通过 +5"
+    },
+    {
+      "t": 47,
+      "type": "agent_status",
+      "agent": "reviewer",
+      "status": "idle",
+      "message": "报告评审通过 ✓"
+    },
+    {
+      "t": 48,
+      "type": "agent_status",
+      "agent": "patrol",
+      "status": "patrolling",
+      "message": "开始例行巡查..."
+    },
+    {
+      "t": 49,
+      "type": "log",
+      "agent": "patrol",
+      "content": "检查任务状态：3/3 子任务已完成，1 次返工已修复"
+    },
+    {
+      "t": 50,
+      "type": "agent_status",
+      "agent": "patrol",
+      "status": "done",
+      "message": "巡查完毕，一切正常 ✓"
+    },
+    {
+      "t": 51,
+      "type": "log",
+      "agent": "planner",
+      "content": "任务完成！产出：2026 年大语言模型趋势研究报告（3500字），含 12 篇论文引用 + 5 份行业报告数据"
+    },
+    {
+      "t": 52,
+      "type": "summary",
+      "data": {
+        "tasks_completed": 3,
+        "average_score": 4.1,
+        "tokens_used": 1500000,
+        "rework_count": 1,
+        "time_saved": "约 8 小时人力"
+      }
+    }
+  ]
+}

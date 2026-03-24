@@ -1,8 +1,8 @@
 {
   "id": "chaos",
-  "name": "崩溃模拟",
-  "description": "关掉 Reviewer 会发生什么？展示没有审查机制的 AI 团队如何失控",
-  "icon": "⚠️",
+  "name": "自修复演示",
+  "description": "去掉 Reviewer 会怎样？模拟一个缺少质检的 AI 团队，看巡查者如何发现异常并触发自修复。",
+  "icon": "ShieldAlert",
   "duration": 35,
   "agents": [
     { "id": "planner", "name": "总编", "role": "planner", "avatar": "🧠" },
@@ -149,7 +149,7 @@
       "data": {
         "tasks_completed": 1,
         "average_score": 0,
-        "tokens_used": 3200,
+        "tokens_used": 320000,
         "rework_count": 0,
         "time_saved": "产出不可用，需全部返工"
       }

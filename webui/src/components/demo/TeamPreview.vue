@@ -83,23 +83,23 @@ function handleLaunch() {
 }
 
 .agent-card {
-  background: white;
-  border-radius: 20px;
+  background: #FFFFFF;
+  border-radius: 10px;
   padding: 1.5rem 1.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
   width: 130px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  border: 2px solid transparent;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  border: 1px solid #E8E6E0;
 }
 
 .agent-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   border-color: var(--accent);
-  box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 20%, transparent);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .agent-avatar-wrap {
@@ -121,15 +121,15 @@ function handleLaunch() {
   width: 100%;
   text-align: center;
   border: none;
-  border-bottom: 2px dashed #e2e8f0;
+  border-bottom: 1.5px dashed #D4D0C8;
   background: transparent;
-  font-family: 'Nunito', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #1e293b;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1A1917;
   padding: 0.25rem 0;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.15s;
 }
 
 .agent-name-input:focus {
@@ -137,38 +137,43 @@ function handleLaunch() {
 }
 
 .agent-role {
-  font-size: 0.75rem;
-  color: white;
-  background: var(--accent);
-  padding: 0.15rem 0.6rem;
-  border-radius: 999px;
-  font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--accent);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .launch-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem 2.5rem;
-  font-size: 1.2rem;
-  font-weight: 800;
-  font-family: 'Nunito', sans-serif;
-  color: white;
-  background: linear-gradient(135deg, #818CF8, #6366F1);
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Instrument Sans', sans-serif;
+  color: #FAFAF8;
+  background: #1A1917;
   border: none;
-  border-radius: 16px;
+  border-radius: 7px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+  transition: all 0.15s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .launch-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+  background: #2e2b27;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
 .launch-btn:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(0);
 }
 
 .launch-icon {
@@ -178,5 +183,29 @@ function handleLaunch() {
 @keyframes breathe {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
+}
+
+@media (max-width: 640px) {
+  .agent-grid {
+    gap: 0.75rem;
+  }
+  .agent-card {
+    width: 100px;
+    padding: 1rem 0.75rem;
+  }
+  .agent-avatar-wrap {
+    width: 48px;
+    height: 48px;
+  }
+  .agent-avatar {
+    font-size: 1.6rem;
+  }
+  .agent-name-input {
+    font-size: 0.85rem;
+  }
+  .launch-btn {
+    padding: 9px 22px;
+    font-size: 0.9rem;
+  }
 }
 </style>

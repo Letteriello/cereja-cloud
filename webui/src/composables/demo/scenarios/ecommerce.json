@@ -1,8 +1,8 @@
 {
   "id": "ecommerce",
   "name": "AI 电商运营",
-  "description": "AI 团队为新品智能手表做商品上架全流程，展示多 Executor 并行工作 + 不同审查结果",
-  "icon": "🛒",
+  "description": "模拟电商运营团队：竞品分析 + 详情页 + 营销推文三线并行，看多个 AI 员工如何同时协作完成新品上架。",
+  "icon": "ShoppingCart",
   "duration": 55,
   "agents": [
     { "id": "planner", "name": "运营总监", "role": "planner", "avatar": "🧠" },
@@ -358,7 +358,7 @@
       "data": {
         "tasks_completed": 3,
         "average_score": 3.8,
-        "tokens_used": 12000,
+        "tokens_used": 1200000,
         "rework_count": 1,
         "time_saved": "约 5 小时人力"
       }

@@ -1,8 +1,8 @@
 {
   "id": "content-company",
-  "name": "AI 内容公司",
-  "description": "AI 团队自动写一篇深度文章，完整展示任务拆解 → 执行 → 审查驳回 → 反思返工 → 通过的全流程",
-  "icon": "📰",
+  "name": "AI 内容创意",
+  "description": "模拟内容创作团队：选题策划 → 资料采集 → 文章撰写 → 质量审查，体验 AI 编辑部如何自动产出一篇深度文章。",
+  "icon": "Newspaper",
   "duration": 52,
   "agents": [
     { "id": "planner", "name": "总编", "role": "planner", "avatar": "🧠" },
@@ -313,7 +313,7 @@
       "data": {
         "tasks_completed": 2,
         "average_score": 4.25,
-        "tokens_used": 8500,
+        "tokens_used": 850000,
         "rework_count": 1,
         "time_saved": "约 3 小时人力"
       }

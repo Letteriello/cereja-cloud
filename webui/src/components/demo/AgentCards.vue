@@ -67,23 +67,23 @@ const statusLabels: Record<string, string> = {
 }
 
 .agent-card {
-  background: white;
-  border-radius: 16px;
+  background: #FFFFFF;
+  border-radius: 10px;
   padding: 1rem 0.75rem 0.75rem;
   width: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
   position: relative;
-  border: 2px solid transparent;
+  border: 1px solid #E8E6E0;
 }
 
 .agent-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .agent-card--working,
@@ -131,28 +131,31 @@ const statusLabels: Record<string, string> = {
 }
 
 .agent-name {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #1e293b;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1A1917;
 }
 
 .agent-status-badge {
-  font-size: 0.65rem;
-  font-weight: 600;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 500;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  letter-spacing: 0.3px;
 }
 
-.status--idle { background: #f1f5f9; color: #94a3b8; }
-.status--thinking { background: #EDE9FE; color: #7C3AED; }
-.status--working { background: #DBEAFE; color: #2563EB; }
-.status--reviewing { background: #FEF3C7; color: #D97706; }
-.status--reworking { background: #FEE2E2; color: #DC2626; }
-.status--patrolling { background: #D1FAE5; color: #059669; }
-.status--done { background: #D1FAE5; color: #059669; }
+.status--idle { background: #F5F4F0; color: #8C8A84; }
+.status--thinking { background: #FBF3DC; color: #7A6020; }
+.status--working { background: #E8F0F8; color: #4A7FA5; }
+.status--reviewing { background: #FBF3DC; color: #8B6F4E; }
+.status--reworking { background: #F8E8E8; color: #A05252; }
+.status--patrolling { background: #E8F4ED; color: #4A7A5E; }
+.status--done { background: #E8F4ED; color: #4A7A5E; }
 
 .thinking-dots {
   display: inline-flex;
@@ -174,17 +177,17 @@ const statusLabels: Record<string, string> = {
   bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 0.4rem 0.7rem;
-  font-size: 0.7rem;
-  color: #475569;
+  background: #FFFFFF;
+  border: 1px solid #E8E6E0;
+  border-radius: 6px;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.68rem;
+  color: #4A4845;
   white-space: nowrap;
   max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   z-index: 10;
 }
 
@@ -194,8 +197,8 @@ const statusLabels: Record<string, string> = {
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: white;
+  border: 5px solid transparent;
+  border-top-color: #FFFFFF;
 }
 
 /* Transitions */
@@ -213,5 +216,28 @@ const statusLabels: Record<string, string> = {
 @keyframes dotBounce {
   0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
   40% { transform: translateY(-4px); opacity: 1; }
+}
+
+@media (max-width: 640px) {
+  .agents-row {
+    gap: 0.6rem;
+  }
+  .agent-card {
+    width: 90px;
+    padding: 0.75rem 0.5rem 0.6rem;
+  }
+  .agent-avatar-circle {
+    width: 40px;
+    height: 40px;
+  }
+  .agent-avatar {
+    font-size: 1.3rem;
+  }
+  .agent-name {
+    font-size: 0.72rem;
+  }
+  .agent-bubble {
+    display: none;
+  }
 }
 </style>

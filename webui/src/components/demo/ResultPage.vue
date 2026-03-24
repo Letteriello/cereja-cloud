@@ -38,6 +38,11 @@ const tasksCount = computed(() => summary.value?.tasks_completed ?? 0)
 const avgScore = computed(() => summary.value?.average_score ?? 0)
 const reworkCount = computed(() => summary.value?.rework_count ?? 0)
 const tokensUsed = computed(() => summary.value?.tokens_used ?? 0)
+const tokenCost = computed(() => {
+  // 1元/百万Token
+  const cost = tokensUsed.value / 1000000
+  return cost < 0.01 ? '< ¥0.01' : `¥${cost.toFixed(2)}`
+})
 
 const animTasks = useCountUp(tasksCount.value)
 const animTokens = useCountUp(tokensUsed.value, 2000)
@@ -73,6 +78,7 @@ function getAgentComment(agent: { score: number; role: string; name: string }): 
       <div class="stat-card stat-card--blue">
         <div class="stat-value">{{ animTokens.toLocaleString() }}</div>
         <div class="stat-label">Token 消耗</div>
+        <div class="stat-cost">≈ {{ tokenCost }}</div>
       </div>
     </div>
 
@@ -126,15 +132,17 @@ function getAgentComment(agent: { score: number; role: string; name: string }): 
 
 .result-title {
   text-align: center;
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #1e293b;
+  font-family: 'Lora', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1A1917;
   margin: 0 0 0.5rem;
+  letter-spacing: -0.5px;
 }
 
 .result-subtitle {
   text-align: center;
-  color: #94a3b8;
+  color: #8C8A84;
   margin: 0 0 2rem;
 }
 
@@ -152,33 +160,45 @@ function getAgentComment(agent: { score: number; role: string; name: string }): 
 }
 
 .stat-card {
-  background: white;
-  border-radius: 16px;
+  background: #FFFFFF;
+  border: 1px solid #E8E6E0;
+  border-radius: 10px;
   padding: 1.25rem;
   text-align: center;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 .stat-card:nth-child(2) { animation-delay: 0.1s; }
 .stat-card:nth-child(3) { animation-delay: 0.2s; }
 .stat-card:nth-child(4) { animation-delay: 0.3s; }
 
-.stat-card--purple { border-top: 3px solid #818CF8; }
-.stat-card--yellow { border-top: 3px solid #FBBF24; }
-.stat-card--red { border-top: 3px solid #F87171; }
-.stat-card--blue { border-top: 3px solid #38BDF8; }
+.stat-card--purple { border-top: 3px solid #8B6F4E; }
+.stat-card--yellow { border-top: 3px solid #C09840; }
+.stat-card--red { border-top: 3px solid #A05252; }
+.stat-card--blue { border-top: 3px solid #4A7FA5; }
 
 .stat-value {
+  font-family: 'Lora', serif;
   font-size: 2rem;
-  font-weight: 800;
-  color: #1e293b;
+  font-weight: 700;
+  color: #1A1917;
 }
 
 .stat-label {
-  font-size: 0.8rem;
-  color: #94a3b8;
-  font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  color: #8C8A84;
+  font-weight: 500;
   margin-top: 0.25rem;
+  letter-spacing: 0.3px;
+}
+
+.stat-cost {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  color: #4A7A5E;
+  font-weight: 500;
+  margin-top: 0.15rem;
 }
 
 .time-saved {
@@ -187,22 +207,25 @@ function getAgentComment(agent: { score: number; role: string; name: string }): 
   justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #D1FAE5, #DBEAFE);
-  border-radius: 12px;
+  background: #FBF3DC;
+  border: 1px solid #E8D89A;
+  border-radius: 6px;
   margin-bottom: 2rem;
 }
 
 .time-saved-icon { font-size: 1.2rem; }
 .time-saved-text {
-  font-size: 0.95rem;
-  color: #334155;
+  font-size: 0.9rem;
+  color: #4A4845;
 }
 
 .section-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #334155;
+  font-family: 'Lora', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1A1917;
   margin: 0 0 1rem;
+  letter-spacing: -0.2px;
 }
 
 .agent-results {
@@ -213,8 +236,9 @@ function getAgentComment(agent: { score: number; role: string; name: string }): 
 }
 
 .agent-result-card {
-  background: white;
-  border-radius: 14px;
+  background: #FFFFFF;
+  border: 1px solid #E8E6E0;
+  border-radius: 10px;
   padding: 1rem;
   display: flex;
   align-items: center;
@@ -246,9 +270,10 @@ function getAgentComment(agent: { score: number; role: string; name: string }): 
 }
 
 .ar-name {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #1e293b;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1A1917;
 }
 
 .ar-score {
@@ -259,19 +284,21 @@ function getAgentComment(agent: { score: number; role: string; name: string }): 
 }
 
 .ar-score-num {
+  font-family: 'Lora', serif;
   font-size: 1.2rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--accent);
 }
 
 .ar-score-label {
-  font-size: 0.7rem;
-  color: #94a3b8;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: #8C8A84;
 }
 
 .ar-comment {
   font-size: 0.75rem;
-  color: #64748b;
+  color: #4A4845;
 }
 
 .cta-section {
@@ -285,36 +312,37 @@ function getAgentComment(agent: { score: number; role: string; name: string }): 
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.85rem 2rem;
-  font-size: 1rem;
-  font-weight: 700;
-  font-family: 'Nunito', sans-serif;
-  border-radius: 14px;
+  padding: 10px 22px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Instrument Sans', sans-serif;
+  border-radius: 7px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.15s;
   text-decoration: none;
 }
 
 .cta-btn--primary {
-  background: linear-gradient(135deg, #818CF8, #6366F1);
-  color: white;
+  background: #1A1917;
+  color: #FAFAF8;
   border: none;
-  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .cta-btn--primary:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+  background: #2e2b27;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
 .cta-btn--secondary {
-  background: white;
-  color: #475569;
-  border: 2px solid #e2e8f0;
+  background: #FFFFFF;
+  color: #4A4845;
+  border: 1px solid #D4D0C8;
 }
 .cta-btn--secondary:hover {
-  border-color: #818CF8;
-  color: #818CF8;
-  transform: translateY(-2px);
+  border-color: #4A4845;
+  color: #1A1917;
+  background: #F5F4F0;
 }
 
 @keyframes fadeIn {
@@ -330,5 +358,33 @@ function getAgentComment(agent: { score: number; role: string; name: string }): 
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(-10px); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .stat-card {
+    padding: 1rem;
+  }
+  .stat-value {
+    font-size: 1.5rem;
+  }
+  .agent-result-card {
+    flex: 1 1 100%;
+  }
+  .result-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .result-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .time-saved {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
 }
 </style>
