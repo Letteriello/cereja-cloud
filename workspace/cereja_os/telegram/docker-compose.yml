@@ -1,0 +1,41 @@
+# Docker Compose snippet for Telegram Bot - Cereja OS
+# Add this to your main docker-compose.yml or use standalone
+
+version: "3.8"
+
+services:
+  telegram-bot:
+    build:
+      context: ./telegram
+      dockerfile: Dockerfile
+    container_name: cereja-telegram-bot
+    restart: unless-stopped
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}                    # Required: Telegram bot token
+      - WEBHOOK_MODE=true                         # true for production
+      - WEBHOOK_HOST=${WEBHOOK_HOST}              # e.g., https://your-domain.com
+      - WEBHOOK_PATH=/webhook/telegram
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8080
+      - TENANT_MAP=${TENANT_MAP}                 # Optional: chat_id:tenant_id mappings
+    ports:
+      - "8080:8080"                               # Webhook port
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Alternative: Polling mode (development only)
+  # telegram-bot-dev:
+  #   build:
+  #     context: ./telegram
+  #     dockerfile: Dockerfile
+  #   container_name: cereja-telegram-bot-dev
+  #   restart: "no"
+  #   environment:
+  #     - BOT_TOKEN=${BOT_TOKEN}
+  #     - WEBHOOK_MODE=false
+  #   profiles:
+  #     - dev

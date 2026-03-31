@@ -1,0 +1,34 @@
+# ============================================================
+# Cereja OS — Logrotate Configuration
+# Auto-installed by vps-setup.sh
+# Rotate: /opt/cereja-os/logs/*.log and nginx container logs
+# ============================================================
+
+/opt/cereja-os/logs/*.log {
+    daily
+    missingok
+    rotate 14
+    compress
+    delaycompress
+    notifempty
+    create 0640 ubuntu ubuntu
+    sharedscripts
+    postrotate
+        # Signal nginx to reopen logs (inside container)
+        docker exec cereja-nginx nginx -s reload 2>/dev/null || true
+    endscript
+}
+
+/opt/cereja-os/infrastructure/docker/nginx-logs/*.log {
+    daily
+    missingok
+    rotate 14
+    compress
+    delaycompress
+    notifempty
+    create 0640 ubuntu ubuntu
+    sharedscripts
+    postrotate
+        docker exec cereja-nginx nginx -s reload 2>/dev/null || true
+    endscript
+}
