@@ -1,53 +1,44 @@
-# OpenMOSS 任务调度中间件 — 配置文件模板
-# 复制此文件为 config.yaml 并修改配置
+# Cereja OS - Example Configuration
+# Copy this to config.yaml and fill in your values
+# NEVER commit config.yaml with real secrets to version control!
 
-# 项目名称
-project:
-  name: "OpenMOSS"
-
-# 管理员配置
 admin:
-  password: "admin123" # 首次启动后自动替换为 MD5 加密
+  # Generate with: python -c "from passlib.hash import bcrypt; print(bcrypt.hash('your-password'))"
+  password: bcrypt:YOUR_HASH_HERE
 
-# Agent 注册
 agent:
-  registration_token: "openclaw-register-2024" # Agent 自动注册令牌
-  allow_registration: true # Agent 自注册开关（false=关闭自注册，只能由管理员创建）
+  allow_registration: true
+  # IMPORTANT: Change this token and keep it secret!
+  registration_token: CHANGE_ME_TO_RANDOM_TOKEN
 
-# 通知渠道（OpenMOSS 内置消息，Agent 通过 GET /config/notification 获取后自行发送）
-notification:
-  enabled: false
-  # 目标渠道：格式为 渠道类型:目标ID
-  channels: []
-    # - "chat:oc_1f99abbba2bf0f8733377893d976ffa5"   # 飞书群（把 Agent 拉进群/艾特一次即可获取 chat_id）
-    # - "user:ou_xxxxxxxxxxxxxxxxxxxxxxxxxxxx"        # 飞书私聊（open_id）
-  # 触发通知的事件类型
-  events:
-    - task_completed # 子任务完成时通知
-    - review_rejected # 审查驳回（返工）时通知
-    - all_done # 整个任务所有子任务全部完成时通知
-    - patrol_alert # 巡查发现异常时通知
-
-# 服务配置
-server:
-  port: 6565
-  host: "0.0.0.0"
-  external_url: ""  # 服务外网访问地址（Agent 对接用，如 https://moss.example.com）
-
-# 数据库配置
 database:
+  path: ./data/tasks.db
   type: sqlite
-  path: "./data/tasks.db"
 
-# 工作目录
-workspace:
-  root: "/home/your-user/TaskWork"
+notification:
+  channels:
+    - "telegram:YOUR_CHAT_ID_HERE"
+  enabled: true
+  events:
+    - task_completed
+    - review_rejected
+    - all_done
+    - patrol_alert
 
-# WebUI 配置
-webui:
-  public_feed: false # 活动流展示页公开开关（true=任何人可访问）
-  feed_retention_days: 7 # 请求日志保留天数（超期自动清理）
+project:
+  name: Cereja
 
-# 初始化标记（由 Setup Wizard 自动设置，请勿手动修改）
+server:
+  external_url: https://YOUR_DOMAIN.com
+  host: 0.0.0.0
+  port: 6565
+
 setup:
   initialized: false
+
+webui:
+  feed_retention_days: 7
+  public_feed: false
+
+workspace:
+  root: /path/to/your/workspace

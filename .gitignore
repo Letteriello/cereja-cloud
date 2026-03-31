@@ -1,6 +1,10 @@
 # OpenClaw 项目
 data/
+
+# Sensitive config - NEVER commit these
 config.yaml
+config.yaml.backup
+*.local.yaml
 prompts-private/
 tests/
 skills/dist/
