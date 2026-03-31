@@ -37,7 +37,6 @@ Cereja OS é uma plataforma que combina o **OpenClaw** (gateway de canais e agen
 │  │  • Skills / ClawHub marketplace                             │   │
 │  │  • Cron + Webhooks                                          │   │
 │  │  • WebChat integrado                                        │   │
-│  │  • Tailscale Serve/Funnel                                   │   │
 │  └─────────────────────────────────────────────────────────────┘   │
 │                              │                                      │
 │                              ▼                                      │
@@ -131,7 +130,7 @@ Patrol (logs)
 | PostgreSQL | Banco de dados |
 | Redis | Cache/Sessions |
 
-###Frontend
+### Frontend
 | Tecnologia | Uso |
 |-----------|-----|
 | Next.js 14 | Framework React |
@@ -158,7 +157,7 @@ cereja_os/
 │   ├── app/
 │   │   ├── models/           # SQLAlchemy models
 │   │   ├── routers/          # API endpoints
-│   │   ├── schemas/          # Pydantic schemas
+│   │   ├── schemas/           # Pydantic schemas
 │   │   ├── services/         # Business logic
 │   │   └── main.py           # Entry point
 │   └── requirements.txt
